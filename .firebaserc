@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "vijayanand321portfolio"
+  },
+  "hosting": {
+    "deployTimeout": "600000" 
+  }
+  
+}
