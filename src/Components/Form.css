@@ -11,11 +11,11 @@ form{
     max-width: 600px;
 }
 
-form input,form textarea{
+form input,form textarea{ 
     margin-bottom: 1rem;
-    padding: 10px 17px;
+    padding: 10px 17px; 
     font-size: 1.2rem;
-    background-color: rgb(40, 38, 43,0.1);
-    border-color: rgb(41, 41, 56 ,0.1);
+    background-color: rgba(242, 236, 75, 0.2);
+    border-color: rgba(188, 188, 212, 0.5);
     color: antiquewhite;
 }

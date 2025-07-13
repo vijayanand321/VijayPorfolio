@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
@@ -26,6 +26,12 @@ h1,h4,p,a{
   cursor: pointer;
 }
 
+.btn:hover{
+  background: transparent;
+  color: antiquewhite;
+  transition: 0.3s;
+}
+
 .btn-light{
   padding: 12px 32px;
   font-size: 1rem;
@@ -35,10 +41,17 @@ h1,h4,p,a{
   border: 1px solid #fff;
   font-weight: 600 ;
   cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-.btn:hover{
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+.btn-light:hover{
+  background: rgb(248, 217, 15);
+  color: #090101;
   transition: 0.3s;
 }
+
+.btn-light:active {
+  background: transparent;
+  color:antiquewhite /* This gives feedback when the button is pressed */
+}
+

@@ -1,67 +1,129 @@
-import { useState } from "react"
-import "./Form.css"
-import React from 'react'
+import { useState } from "react";
+import "./Form.css";
+import React from 'react';
 
 const Form = () => {
-  const[userData ,setUserData] =useState({
-    name:"",
-    email:"",
-    subject:"",
-    msg:"",
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    message: "",
+    mobileNumber: "",
   });
-  
-  const {name,email,subject,msg} =userData;
-  const postUserData=(e)=>{
-    setUserData({...userData,[e.target.name]:e.target.value})
-  }
 
-  const submitData= async (e)=>{
-   e.preventDefault();
-   const {name,email,subject,msg} =userData;
-   if(name&&email&&subject&&msg){
-   const res = await fetch('https://vijayanand321portfolio-default-rtdb.firebaseio.com/userDatabase.json',
-   {
-   method:'POST',
-   headers :{
-       "Content-Type" : 'application/json',
-   },
-   body : JSON.stringify({
-    name,email,subject,msg,
-   }),
-  }
-   );
-   if(res.ok){
-    setUserData({
-      name: "",
-      email: "",
-      subject:"",
-      msg:"",
-    })
-    alert("Thank you for contacting me");
-   }
-   else {
-    alert('please fill all fields')
-   }
-  }
-else alert("please fill the data")
-  }
+  const { username, email, message, mobileNumber } = userData;
+
+  const [errors, setErrors] = useState({});
+
+  const postUserData = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!username.trim()) newErrors.username = "Username is required";
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!message.trim()) newErrors.message = "Message is required";
+    if (!mobileNumber.trim()) {
+      newErrors.mobileNumber = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(mobileNumber)) {
+      newErrors.mobileNumber = "Mobile number must be 10 digits";
+    }
+    return newErrors;
+  };
+
+  const submitData = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${window._env_.API_BASE_URL}/users`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": 'application/json',
+          "Authorization": "Basic " + btoa(`${process.env.REACT_APP_API_USERNAME}:${process.env.REACT_APP_API_PASSWORD}`),
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (res.ok) {
+        setUserData({
+          username: "",
+          email: "",
+          message: "",
+          mobileNumber: "",
+        });
+        setErrors({});
+        alert("Thank you for contacting me");
+      } else if (res.status === 409) {
+        const errorData = await res.json();
+        alert(errorData.message);
+      } else {
+        const errorvalue = await res.json();
+        const errorValueArray = Object.values(errorvalue);
+        alert(errorValueArray.join(", "));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error. Please try again.');
+    }
+  };
 
   return (
     <div className="form">
-        <form method="post">
-            <label htmlFor="">Your Name</label>
-            <input type="text"  value={name} name="name" onChange={postUserData}/>
-            <label htmlFor="">E-mail</label>
-            <input type="email" value={email} name="email" onChange={postUserData} />
-            <label htmlFor="">Subject</label>
-            <input type="text"  value={subject} name="subject" onChange={postUserData}/>
-            <label htmlFor="">Message</label>
-            <textarea rows="6" placeholder="type your message here" value={msg} name="msg" onChange={postUserData}></textarea>
-            <button className="btn" onClick={submitData}>SUBMIT</button>
-        </form>
+      <form method="post">
+        <label>Username</label>
+        <input
+          type="text"
+          value={username}
+          name="username"
+          onChange={postUserData}
+        />
+        {errors.username && <p className="error">{errors.username}</p>}
 
+        <label>E-mail</label>
+        <input
+          type="email"
+          value={email}
+          name="email"
+          onChange={postUserData}
+        />
+        {errors.email && <p className="error">{errors.email}</p>}
+
+        <label>Message</label>
+        <textarea
+          rows="6"
+          placeholder="Type your message here"
+          value={message}
+          name="message"
+          onChange={postUserData}
+        />
+        {errors.message && <p className="error">{errors.message}</p>}
+
+        <label>Mobile Number</label>
+        <input
+          type="text"
+          value={mobileNumber}
+          name="mobileNumber"
+          onChange={postUserData}
+          maxLength="10"
+        />
+        {errors.mobileNumber && <p className="error">{errors.mobileNumber}</p>}
+
+        <button className="btn" onClick={submitData}>
+          SUBMIT
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

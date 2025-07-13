@@ -6,6 +6,12 @@
     padding: 0 1rem;
     list-style: none;
     color: whitesmoke;
+    transition: background 2s, border 4s ease;
+}
+
+.navMenu li:hover{
+    background:black;
+    border: 1px solid antiquewhite;
 }
 
 .navMenu li a{

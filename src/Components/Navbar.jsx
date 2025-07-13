@@ -25,7 +25,7 @@ window.addEventListener("scroll",changeColor)
             <li><Link to="/">Home</Link> </li>
             <li><Link to="/Project">Project</Link></li>
             <li><Link to="/About">About</Link></li>
-            <li><Link to="/ContactUs">ContactUs</Link></li>
+            <li><Link to="/ContactUs">GetInTouch</Link></li>
         </ul>
         <div className="hamburger" onClick={handleClick}>
             {click ? <FaTimes size={20} style={{ color: "whitesmoke" }} ></FaTimes>
