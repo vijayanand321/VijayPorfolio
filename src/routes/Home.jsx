@@ -5,6 +5,7 @@ import Footer from '../Components/Footer';
 import Work from "../Components/Work"
 import AboutContent from '../Components/AboutContent';
 import PriceCart from '../Components/PriceCart';
+import Form from '../Components/Form';
 const Home = () => {
   return (
     <div>
@@ -13,6 +14,7 @@ const Home = () => {
         <Work></Work>
         <AboutContent></AboutContent>
         <PriceCart></PriceCart>
+        <Form/>
         <Footer/>
     </div>
   )

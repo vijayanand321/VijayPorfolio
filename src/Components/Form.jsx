@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Form.css";
 import React from 'react';
+import { FaUserTag } from "react-icons/fa";
 
 const Form = () => {
   const [userData, setUserData] = useState({
@@ -79,6 +80,11 @@ const Form = () => {
 
   return (
     <div className="form">
+      
+        <div className="form-icon">
+          <FaUserTag size={40} className="icon" />
+        </div>
+        
       <form method="post">
         <label>Username</label>
         <input

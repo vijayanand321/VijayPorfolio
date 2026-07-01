@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
 
         <div className="right">
-          <h4>About Me</h4>
+          <h4>Tagline</h4>
           <p>{footer.about}</p>
           <div className="social">
             <a href={footer.facebook} target="blank">

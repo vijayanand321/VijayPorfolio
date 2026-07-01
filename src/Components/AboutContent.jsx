@@ -1,7 +1,7 @@
 import "./AboutContent.css"
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import img from "../Images/pic1.jpg";
+import img from "../Images/pic3.jpeg";
 import img2 from "../Images/pic2.jpg"
 import { getVijay } from "../API/VijayApi";
 const AboutContent = () => {
@@ -82,7 +82,6 @@ const AboutContent = () => {
       </div>
 
        <div className="info">
-        <h4 className="info-data">{vijay.aboutData}</h4>
         <h4 className="info-data">{vijay.aboutData}</h4>
        </div>
 

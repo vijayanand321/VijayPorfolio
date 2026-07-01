@@ -1,28 +1,26 @@
 import axios from "axios";
 
-//baseURL: `${protocol}//${hostname}:${portname}`
-// baseURL: process.env.REACT_APP_API_BASE_URL,n
-const AxiosInstance= ()=>{
-const protocol= window.location.protocol;
-const hostname=window.location.hostname;
-const portname=8081;
+const AxiosInstance = () => {
+  const protocol = window.location.protocol;
+  const hostname = window.location.hostname;
+  const portname = 8081;
 
-const token = btoa(`${process.env.REACT_APP_API_USERNAME}:${process.env.REACT_APP_API_PASSWORD}`);
-console.log(token)
+  // 1. Determine the baseURL using an ordered fallback chain
+  const baseURL = 
+    window._env_?.API_BASE_URL || 
+    process.env.REACT_APP_API_BASE_URL || 
+    `${protocol}//${hostname}:${portname}`;
 
-const baseURL = window._env_?.API_BASE_URL;
-
-if (!baseURL) {
-    throw new Error("API_BASE_URL is missing in config.json");
-  }
+  // Log it to your console so you can see exactly where the frontend is pointing
+  console.log("Axios connected to baseURL:", baseURL);
 
   return axios.create({
-    baseURL: baseURL || `${protocol}//${hostname}:${portname}` || process.env.REACT_APP_API_BASE_URL,
-    headers:{
-        'Authorization': `Basic `+btoa(`${process.env.REACT_APP_API_USERNAME}:${process.env.REACT_APP_API_PASSWORD}`),
-        Accept: 'application/json, application/pdf'
+    baseURL: baseURL,
+    headers: {
+      'Authorization': `Basic ` + btoa(`${process.env.REACT_APP_API_USERNAME}:${process.env.REACT_APP_API_PASSWORD}`),
+      'Accept': 'application/json, application/pdf'
     }
-});
-} 
+  });
+};
 
 export default AxiosInstance;

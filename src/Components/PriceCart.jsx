@@ -1,5 +1,5 @@
 import "./PriceCart.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { getCertificates } from "../API/CertificateApi";
 
@@ -94,11 +94,11 @@ const PriceCart = () => {
       <div className="page-info">
         <span>{currentPage} of {totalPages}</span>
       </div>
-        <br />
+        {/* <br />
         <h1>Contact me for projects , either to purchase or to create one for you <br />vijayanand030201@gmail.com</h1>
         <p>Make your portfolio @ just $20 </p>
         <br />
-        <Link to="/ContactUs" className="btn btnUpdate">BUY NOW</Link>
+        <Link to="/ContactUs" className="btn btnUpdate">BUY NOW</Link> */}
     </div>
   )
 }

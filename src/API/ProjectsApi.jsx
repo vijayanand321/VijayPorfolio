@@ -5,7 +5,7 @@ export const getProjectsData = async ()=>{
         const axiosInstance = AxiosInstance();
        const projectResponse= await axiosInstance.get('/projects');
         if(projectResponse.status===200){
-            console.log(projectResponse.data);
+            //console.log(projectResponse.data);
             return projectResponse.data;
         }
     } catch (error) {
